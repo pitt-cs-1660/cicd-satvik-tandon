@@ -74,8 +74,8 @@ jobs:
     permissions:
       contents: 'read'
       id-token: 'write'
-    needs:
-      - integration-test
+    # needs:
+    #   - integration-test
     steps:
       # checkout code
       - name: Checkout code
