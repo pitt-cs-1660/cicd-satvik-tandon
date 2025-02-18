@@ -3,13 +3,13 @@ on:
     branches:
       - '**'
     
-    workflow_dispatch:
-      inputs:
-        debug:
-          description: 'Debug jobs'
-          required: false
-          type: string
-          default: 'false'
+  workflow_dispatch:
+    inputs:
+      debug:
+        description: 'Debug jobs'
+        required: false
+        type: string
+        default: 'false'
 
 jobs:
   docker-check:
