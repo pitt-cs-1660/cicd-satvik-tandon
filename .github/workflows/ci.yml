@@ -1,15 +1,15 @@
 on:
   push:
     branches:
-      - '**'
-    
+      - "**"
+
   workflow_dispatch:
     inputs:
       debug:
-        description: 'Debug jobs'
+        description: "Debug jobs"
         required: false
         type: string
-        default: 'false'
+        default: "false"
 
 jobs:
   docker-check:
@@ -27,7 +27,7 @@ jobs:
             echo "❌ Dockerfile not found!"
             exit 1
           fi
-      
+
           # Check number of stages
           STAGE_COUNT=$(grep -c '^FROM' "$DOCKERFILE")
           echo "✅ Found $STAGE_COUNT stages in the Dockerfile."
@@ -35,7 +35,7 @@ jobs:
             echo "❌ Dockerfile must have at least 2 stages (multi-stage build required)."
             exit 1
           fi
-      
+
           # Check base image
           if ! grep -q '^FROM python:3.11-buster' "$DOCKERFILE"; then
             echo "❌ Base image is not 'python:3.11-buster'"
@@ -43,7 +43,7 @@ jobs:
           else
             echo "✅ Base image is 'python:3.11-buster'"
           fi
-      
+
           # Check WORKDIR
           if ! grep -q '^WORKDIR /app' "$DOCKERFILE"; then
             echo "❌ WORKDIR is not set to '/app'"
@@ -69,11 +69,11 @@ jobs:
         run: docker compose down
 
   deploy:
-    if: github.event.inputs.debug == 'true'
+    # if: github.event.inputs.debug == 'true'
     runs-on: ubuntu-22.04
     permissions:
-      contents: 'read'
-      id-token: 'write'
+      contents: "read"
+      id-token: "write"
     # needs:
     #   - integration-test
     steps:
@@ -81,30 +81,30 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-     # authenticate with GCP with workload identity provider
-      - uses: 'google-github-actions/auth@v2'
+      # authenticate with GCP with workload identity provider
+      - uses: "google-github-actions/auth@v2"
         id: auth
         name: Authenticate to GCP
         with:
-          project_id: 'spring-2025-cc' # update with your project ID
-          workload_identity_provider: 'projects/785993937496/locations/global/workloadIdentityPools/github-pool/providers/my-repo' # update with your Workload Identity Pool
-      
+          project_id: "spring-2025-cc" # update with your project ID
+          workload_identity_provider: "projects/785993937496/locations/global/workloadIdentityPools/github-pool/providers/my-repo" # update with your Workload Identity Pool
+
       - name: Setup gcloud CLI
         uses: google-github-actions/setup-gcloud@v2
         with:
-          project_id: 'spring-2025-cc'
+          project_id: "spring-2025-cc"
 
-     # configure/login with docker
+      # configure/login with docker
       - name: gcloud Configure Docker
         run: gcloud auth configure-docker us-east1-docker.pkg.dev --quiet
 
-     # setup docker buildx
+      # setup docker buildx
       # - name: Setup docker buildx
       #   uses: docker/setup-buildx-action@v3
       #   with:
       #     platforms: linux/amd64,linux/arm64
 
-     # build and push the image
+      # build and push the image
       # - name: Build and Push
       #   uses: docker/build-push-action@v6
       #   with:
