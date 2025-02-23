@@ -13,7 +13,6 @@ on:
 
 jobs:
   docker-check:
-    # if: github.event.inputs.debug == 'false'
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
@@ -69,7 +68,6 @@ jobs:
         run: docker compose down
 
   deploy:
-    # if: github.event.inputs.debug == 'true'
     runs-on: ubuntu-22.04
     permissions:
       contents: "read"
@@ -86,13 +84,13 @@ jobs:
         id: auth
         name: Authenticate to GCP
         with:
-          project_id: "spring-2025-cc" # update with your project ID
-          workload_identity_provider: "projects/785993937496/locations/global/workloadIdentityPools/github/providers/my-repo" # update with your Workload Identity Pool
+          project_id: ${{ secrets.PROJECT_ID }} # update with your project ID
+          workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
 
       - name: Setup gcloud CLI
         uses: google-github-actions/setup-gcloud@v2
         with:
-          project_id: "spring-2025-cc"
+          project_id: ${{ secrets.PROJECT_ID }}
 
       # configure/login with docker
       - name: gcloud Configure Docker
