@@ -87,8 +87,8 @@ jobs:
         name: Authenticate to GCP
         with:
           project_id: "spring-2025-cc" # update with your project ID
-          workload_identity_provider: "projects/785993937496/locations/global/workloadIdentityPools/satvik-github-pool/providers/my-repo" # update with your Workload Identity Pool
-          # service_account: 'github@spring-2025-cc.iam.gserviceaccount.com'
+          workload_identity_provider: "projects/785993937496/locations/global/workloadIdentityPools/github-pool-satvik/providers/satvik-provider" # update with your Workload Identity Pool
+          service_account: 'satvik-service-account@spring-2025-cc.iam.gserviceaccount.com'
 
       - name: Setup gcloud CLI
         uses: google-github-actions/setup-gcloud@v2
@@ -112,4 +112,4 @@ jobs:
           context: ./
           file: ./Dockerfile
           push: true
-          tags: us-central1-docker.pkg.dev/spring-2025-cc/cicd-satvik-tandon/app:v3
+          tags: us-central1-docker.pkg.dev/spring-2025-cc/satvik-repo/app:v3
