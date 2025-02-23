@@ -88,6 +88,7 @@ jobs:
         with:
           project_id: "spring-2025-cc" # update with your project ID
           workload_identity_provider: "projects/785993937496/locations/global/workloadIdentityPools/satvik-github-pool/providers/my-repo" # update with your Workload Identity Pool
+          service_account: 'github@spring-2025-cc.iam.gserviceaccount.com'
 
       - name: Setup gcloud CLI
         uses: google-github-actions/setup-gcloud@v2
