@@ -111,4 +111,4 @@ jobs:
           context: ./
           file: ./Dockerfile
           push: true
-          tags: us-east1-docker.pkg.dev/spring-2025-cc/my-repo/fastapi-server:v2
+          tags: us-east1-docker.pkg.dev/spring-2025-cc/cicd-assignment-2/fastapi-server:v2
