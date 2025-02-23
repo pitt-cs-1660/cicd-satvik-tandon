@@ -43,4 +43,3 @@ ENTRYPOINT ["/app/entrypoint.sh"]
 
 # Command to start FastAPI
 CMD ["uvicorn", "cc_compose.server:app", "--reload", "--host", "0.0.0.0", "--port", "8000"]
-
