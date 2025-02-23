@@ -111,4 +111,4 @@ jobs:
           context: ./
           file: ./Dockerfile
           push: true
-          tags: us-central1-docker.pkg.dev/spring-2025-cc/cicd-satvik-tandon/fastapi-server:v2
+          tags: us-central1-docker.pkg.dev/spring-2025-cc/cicd-satvik-tandon/app:v3
