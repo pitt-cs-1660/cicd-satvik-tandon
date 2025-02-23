@@ -112,4 +112,4 @@ jobs:
           context: ./
           file: ./Dockerfile
           push: true
-          tags: us-central1-docker.pkg.dev/spring-2025-cc/satvik-repo/app:v3 
+          tags: us-central1-docker.pkg.dev/spring-2025-cc/satvik-repo/app:v3
